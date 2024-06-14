@@ -1,4 +1,6 @@
 import os
+from gliner import GLiNER
+
 
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
@@ -15,6 +17,10 @@ def index():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+model = GLiNER.from_pretrained("urchade/gliner_medium")
+model.eval()
+print("ok")
 
 @app.route('/hello', methods=['POST'])
 def hello():
